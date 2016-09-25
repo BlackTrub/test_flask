@@ -33,6 +33,14 @@ def about_page():
     return 'about page'
 
 
+@app.route('/login', methods=['GET', 'POST'])
+def login():
+    if request.method == 'POST':
+        pass
+    elif request.method == 'GET':
+        pass
+
+
 with app.test_request_context():
     print(url_for('home_page', next='/'))
 
