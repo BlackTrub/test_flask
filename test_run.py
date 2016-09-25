@@ -1,4 +1,4 @@
-from flask import Flask, url_for
+from flask import Flask, url_for, request, render_template
 
 app = Flask(__name__)
 
@@ -8,9 +8,10 @@ def home_page():
     return 'Home page'
 
 
-@app.route('/hello')
-def hello_page():
-    return 'Hello page'
+@app.route('/hello/')
+@app.route('/hello/<name>')
+def hello_page(name=None):
+    return render_template('hello_page.html', name=name)
 
 
 @app.route('/user/<username>')
@@ -43,6 +44,11 @@ def login():
 
 with app.test_request_context():
     print(url_for('home_page', next='/'))
+
+with app.test_request_context('/hello', method='POST'):
+    assert request.path == '/hello'
+    assert request.method == 'POST'
+
 
 if __name__ == '__main__':
     app.run()
