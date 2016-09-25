@@ -1,4 +1,4 @@
-from flask import Flask
+from flask import Flask, url_for
 
 app = Flask(__name__)
 
@@ -31,6 +31,10 @@ def show_projects():
 @app.route('/about')
 def about_page():
     return 'about page'
+
+
+with app.test_request_context():
+    print(url_for('home_page', next='/'))
 
 if __name__ == '__main__':
     app.run()
