@@ -42,13 +42,5 @@ def login():
         pass
 
 
-with app.test_request_context():
-    print(url_for('home_page', next='/'))
-
-with app.test_request_context('/hello', method='POST'):
-    assert request.path == '/hello'
-    assert request.method == 'POST'
-
-
 if __name__ == '__main__':
     app.run()
